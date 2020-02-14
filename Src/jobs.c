@@ -2745,6 +2745,9 @@ bin_kill(char *nam, char **argv, UNUSED(Options ops), UNUSED(int func))
 	} else if (!isanum(*argv)) {
 	    zwarnnam("kill", "illegal pid: %s", *argv);
 	    returnval++;
+	} else if ((*argv)[0] == '\0')  {
+	    zwarnnam("kill", "empty pid provided");
+	    returnval++;
 	} else {
 	    int pid = atoi(*argv);
 	    if (kill(pid, sig) == -1) {
